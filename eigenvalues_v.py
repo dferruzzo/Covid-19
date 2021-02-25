@@ -1,6 +1,6 @@
 #%% -*- coding: utf-8 -*-
 """
-Created on Fri Jul 24, 2020
+Created on Fri Aug 08, 2020
 
 @author: Diego Ferruzzo
 -----------------------------------
@@ -15,7 +15,8 @@ s,i,sick,r,v = sym.symbols('s,i,sick,r,v', positive=True)
 x = sym.Matrix([s,i,sick,v])
 # parameters
 mu, gamma, alpha, theta, omega, beta1, beta2, beta3, zeta=\
-    sym.symbols('mu,gamma,alpha,theta,omega,beta1,beta2,beta3,zeta', positive=True) 
+    sym.symbols('mu,gamma,alpha,theta,omega,beta1,beta2,beta3,zeta',\
+                positive=True) 
 # The right-hand side
 f = sym.Matrix([[mu + gamma - alpha*(1-theta)*s*i\
                  -(mu + gamma + omega)*s - gamma*i - gamma*sick\
@@ -38,7 +39,7 @@ sick_fd = 0
 v_fd = sym.solve(f[3].subs(s,s_v_fd),v)[0]
 # computing s
 s_fd = sym.simplify(s_v_fd.subs(v,v_fd))
-#%%
+#
 # testing the free-disease equilibrium
 print('\nTesting the free-disease equilibrium')
 print('------------------------------------')
@@ -96,7 +97,17 @@ print('f(s^*,i^*,sick^*,v^*) =',sym.simplify(f.subs(s,s_en).subs(i,i_en).subs(si
 print('\ni^* as a function of v^*')
 print('------------------------')
 print('i^*=',sym.latex(sym.collect(sym.collect(sym.collect(sym.collect(sym.collect(sym.collect(sym.factor(i_en),v),gamma),alpha),omega),mu),theta)))
-
-# %%
-
-# %%
+#%% substituting v^* into i^*
+i_en_f = sym.simplify(i_en.subs(v,v_en))
+num_i, den_i = fraction(i_en_f)
+a = simplify(num_i.leadterm(omega)[0])
+b_temp = num_i-a*omega**2
+b = b_temp.leadterm(omega)[0]
+c = sym.simplify(num_i - a*omega**2 - b*omega)
+#%% 
+""" 
+The existence condition for the endemic equilibrium depend on the 
+positiveness the numetaror of i^*, in this case num_i, so we solve num_i for 
+omega
+"""
+omega_cond = sym.solve(num_i,omega,dict=True,set=True,simplify=True)

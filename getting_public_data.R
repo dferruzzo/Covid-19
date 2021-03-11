@@ -1,6 +1,6 @@
 # Script para ler os dados das três cidades
 # Autor : Diego Ferruzzo
-# Data: 05/08/2020
+# Data: 09/03/2021
 # ------------------------------------------------------------------------------
 # Clear environment
 rm(list = ls()) 
@@ -49,13 +49,12 @@ head(isolamento)
 
 isolamento$Data <- as.Date(str_sub(isolamento$STR_DATA,star=25L,end=-2L),"%d/%m/%Y")
 head(isolamento)
-
-isolamento$`?ndice De Isolamento` <- as.numeric(sub("%","",
-                              isolamento$`?ndice De Isolamento`))/100
-names(isolamento)[names(isolamento) == "?ndice De Isolamento"] <- "Isol"
+isolamento$`Índice De Isolamento` <- as.numeric(sub("%","",
+                              isolamento$`Índice De Isolamento`))/100
+names(isolamento)[names(isolamento) == "Índice De Isolamento"] <- "Isol"
 head(isolamento)
 #
-isol_saopaulo <- isolamento[isolamento$Munic?pio == "S?O PAULO",c(3,9)]
+isol_saopaulo <- isolamento[isolamento$Município == "SÃO PAULO",c(3,9)]
 head(isol_saopaulo)
 # sorting by date
 isol_saopaulo <- isol_saopaulo[order(as.Date(isol_saopaulo$Data,
@@ -64,7 +63,7 @@ isol_saopaulo <- na.omit(isol_saopaulo)
 head(isol_saopaulo)
 summary(isol_saopaulo)
 #
-isol_santos <- isolamento[isolamento$Munic?pio == "SANTOS",c(3,9)]
+isol_santos <- isolamento[isolamento$Município == "SANTOS",c(3,9)]
 head(isol_santos)
 # sorting by date
 isol_santos <- isol_santos[order(as.Date(isol_santos$Data, format="%Y-%m-%d")),]
@@ -72,7 +71,7 @@ isol_santos <- na.omit(isol_santos)
 head(isol_santos)
 summary(isol_santos)
 #
-isol_campinas <- isolamento[isolamento$Munic?pio == "CAMPINAS",c(3,9)]
+isol_campinas <- isolamento[isolamento$Município == "CAMPINAS",c(3,9)]
 head(isol_campinas)
 # sorting by date
 isol_campinas <- isol_campinas[order(as.Date(isol_campinas$Data,
@@ -113,7 +112,7 @@ linearmodel2 <- lm(isol_saopaulo$Isol~poly(tempo,5))
 #plot(isol_campinas)
 # -----------------
 # salvando os dados
-#write.csv(isol_saopaulo,'data/SaoPaulo_isolamento.csv')
-#write.csv(isol_santos,'data/Santos_isolamento.csv')
-#write.csv(isol_campinas,'data/Campinas_isolamento.csv')
+write.csv(isol_saopaulo,'data/SaoPaulo_isolamento.csv')
+write.csv(isol_santos,'data/Santos_isolamento.csv')
+write.csv(isol_campinas,'data/Campinas_isolamento.csv')
 #

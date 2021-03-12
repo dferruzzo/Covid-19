@@ -46,6 +46,38 @@ def rk4(f,x0,t0,tf,h):
         x[i+1,:] = x[i,:]+(h/6)*(k1+2*k2+2*k3+k4)
         t[i+1]=t[i]+h
     return t, x
+
+def rk4_a(f,x0,t0,tf,h,g):
+    # Implementa o algoritmo Runge-Kutta de 4ta ordem
+    # dotx = f(t,x)
+    # x0 = numpy.array([x1,...,xn]),
+    # t0 : tempo inicial
+    # tf : tempo final
+    # h : passo de integração
+    # adicionalmente avalia a função escalar g(t,x) a cada passo de integração
+    # as saídas são:
+    # t : o vetor tempo 
+    # x : o vetor de estados
+    # gtx : o vetor de avaliação da função g(t,x)
+    from numpy import zeros, absolute, floor
+    N = absolute(floor((tf-t0)/h)).astype(int)
+    x = zeros((N+1,x0.size))
+    t = zeros(N+1)
+    gtx = zeros(N+1)
+    x[0,:] = x0
+    t[0] = t0
+    gtx[0] = g(t0, x0)
+    #
+    for i in range(0,N):
+        k1 = f(t[i],x[i])
+        k2 = f(t[i]+h/2,x[i]+(h*k1)/2)
+        k3 = f(t[i]+h/2,x[i]+(h*k2)/2)
+        k4 = f(t[i]+h,x[i]+h*k3)
+        x[i+1,:] = x[i,:]+(h/6)*(k1+2*k2+2*k3+k4)
+        t[i+1] = t[i] + h
+        #gtx[i+1] = gtx[i] + g(t[i+1], x[i+1,:])
+        gtx[i+1] = g(t[i+1], x[i+1,:])
+    return t, x, gtx
 #
 def rkf45a(f,a,b,ya,M,tol):
     # Implementa o algoritmo Runge-Kutta-Fehlberg de 4(5)ta ordem
@@ -388,3 +420,19 @@ def modelo_vac_1(t,x,p):
     return np.array([mu+gamma-alpha*(1-theta)*s*i-(mu+gamma+omega)*s-gamma*i-gamma*sick,
                      alpha*(1-theta)*s*i-(beta1+beta2+mu)*i,
                      beta2*i-(beta3+mu)*sick])    
+
+def vacinados(t,x,p):
+    import numpy as np
+    # função para ser avaliada durante a integração numérica
+    s = x[0]
+    #i = x[1]
+    #sick = x[2]
+    #mu = p[0]
+    #gamma = p[1]
+    #alpha = p[2]
+    #theta = p[3]
+    #beta1 = p[4]
+    #beta2 = p[5]
+    #beta3 = p[6]
+    omega = p[7]    
+    return np.array([omega*s])    

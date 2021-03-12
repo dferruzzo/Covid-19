@@ -18,4 +18,7 @@
 - [x] Atualizar o Fitting até semana passada, trunquei dados até 31 de janeiro.
 - [x] Atualizar as simulações para as três cidades.
 - [x] Preparar as figuras.
-- [ ] Preparar o texto.
+- [x] Preparar o texto. Não foi necessário.
+- [ ] Rodar simulações para verificar a estabilidade do ponto de equilíbrio endêmico.
+- [ ] Considerar número de leitos de UTI.
+- [ ] Considerar  computar $\omega s$

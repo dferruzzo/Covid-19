@@ -8,12 +8,12 @@ def rk4_um_passo(f,x,t,h):
     # as saídas são:
     # t : o vetor tempo 
     # x : o vetor de estados
-#N = absolute(floor((tf-t0)/h)).astype(int)
+    #N = absolute(floor((tf-t0)/h)).astype(int)
     #x = zeros((N+1,x0.size))
     #t = zeros(N+1)
     #x[0,:] = x0
     #t[0] = t0
-#   for i in range(0,N):
+    #   for i in range(0,N):
     k1 = f(t,x)
     k2 = f(t+h/2,x+(h*k1)/2)
     k3 = f(t+h/2,x+(h*k2)/2)
@@ -23,7 +23,7 @@ def rk4_um_passo(f,x,t,h):
     return t_out, x_out
 
 def rk4(f,x0,t0,tf,h):
-    # Implementa o algoritmo Runge-Kutta de 4ta ordem
+    # Implementa algoritmo Runge-Kutta de 4ta ordem
     # dotx = f(t,x)
     # x0 = numpy.array([x1,...,xn]),
     # t0 : tempo inicial
@@ -48,7 +48,7 @@ def rk4(f,x0,t0,tf,h):
     return t, x
 
 def rk4_a(f,x0,t0,tf,h,g):
-    # Implementa o algoritmo Runge-Kutta de 4ta ordem
+    # Implementa o algoritmo Runge-Kutta de 4ta ordem e avalia uma função adicional g
     # dotx = f(t,x)
     # x0 = numpy.array([x1,...,xn]),
     # t0 : tempo inicial
@@ -80,7 +80,7 @@ def rk4_a(f,x0,t0,tf,h,g):
     return t, x, gtx
 #
 def rkf45a(f,a,b,ya,M,tol):
-    # Implementa o algoritmo Runge-Kutta-Fehlberg de 4(5)ta ordem
+    # Implementa o algoritmo Runge-Kutta-Fehlberg de 4ta ordem e 5ta ordem para o erro
     # Input
     #   f, a função 
     #   a e b são os pontos a esquerda e direita
@@ -92,7 +92,7 @@ def rkf45a(f,a,b,ya,M,tol):
     #
     from numpy import zeros, absolute, floor, power
     from numpy.linalg import norm
-    # Os coeficientes
+    # Os coeficientes pegue da internet
     a2=1/4
     b2=1/4
     a3=3/8

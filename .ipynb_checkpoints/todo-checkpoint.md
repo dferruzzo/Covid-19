@@ -6,7 +6,7 @@
 - [ ] Simular com $\omega$ como densidade de probabilidade.
 - [ ] Simular segundo modelo de vacinação.
 - [ ] Simular para Campinas e Santos.
-- [ ] Como esconder código e markdown.
+- [x] Como esconder código e markdown.
 
 # To-do grupo de pesquisa Cris-Átila
 11/03/2021
@@ -19,6 +19,10 @@
 - [x] Atualizar as simulações para as três cidades.
 - [x] Preparar as figuras.
 - [x] Preparar o texto. Não foi necessário.
-- [ ] Rodar simulações para verificar a estabilidade do ponto de equilíbrio endêmico.
-- [ ] Considerar número de leitos de UTI.
-- [ ] Considerar  computar $\omega s$
+- [x] Rodar simulações para verificar a estabilidade do ponto de equilíbrio endêmico.
+- [x] (CANCELADO)Considerar número de leitos de UTI.
+- [x] Considerar  computar $\omega s$. Não parece ser muito útil.
+22/03/2021
+- [ ] Uma seção do fitting.
+- [ ] Enviar as figuras como eps.
+- [ ] Tirar os títulos das figuras.
